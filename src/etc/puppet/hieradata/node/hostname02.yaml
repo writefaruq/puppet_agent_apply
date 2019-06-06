@@ -1,0 +1,37 @@
+---
+classes:
+ - ntp
+ - vmwaretools
+ - iptables
+ - sssd
+ntp::restrict:
+ -
+ntp::autoupdate: false
+ntp::enable: true
+ntp::servers:
+ - <ntp1> iburst
+ - <ntp2> iburst
+rhn_register::enable: true
+rhn_register::force: true
+rhn_register::serverurl: <SERVER_URL>
+rhn_register::activationkey: <ACTIVATION_KEY>
+rhn_register::sslca: /usr/share/rhn/RHN-ORG-TRUSTED-SSL-CERT
+vmwaretools::version: 8.6.12.28992
+vmwaretools::working_dir: /tmp/vmwaretools
+vmwaretools::archive_url: puppet
+iptables::config: file
+iptables::source:
+ - puppet:///modules/iptables/iptables-prod
+sssd::domains:
+ - '<DOMAIN>'
+sssd::ldap_sasl_authid: <AUTH_ID>
+sssd:::ldap_domain: '<INSERT>'
+sssd::smb_realm: '<INSERT>'
+sssd::smb_workgroup: '<INSERT>'
+sssd::host_short_name: <INSERT> 
+sssd::host_fqdn: <INSERT> # Check it
+sssd::login_group_allowed:
+ - 'domain admins'
+sssd::sudoers:
+ - 'domain\ admins '
+sssd::domain_realm: '<INSERT>'

@@ -1,0 +1,15 @@
+---
+classes: 
+ - ntp
+ #- rhn_register
+
+ntp::restrict:
+  -
+ntp::autoupdate: false
+ntp::enable: true
+ntp::servers:
+ - <ntp0> iburst
+#rhn_register::enable: true
+#rhn_register::force: false
+#rhn_register::activationkey: ENC[PKCS7,MIIBmQYJKoZIhvcNAQcDoIIBijCCAYYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAF45Lc81jELMgGucgya5F/pj+bgfQiY7HzYQ0Xq2Vs2SUKZuhMbdDG/2jVe4rklHiL5ULBR7O7wT2YbbsJ2QXDqIsQ89NQ61JV9mxOH3Wt1F0jcgs7w4RGE79VmmbmTfDSIilvfRY86QINWKIEgpkTZfOvXhcvByuK1FSHbSPiy+5LGTPxlH92wefKJZ28ijg1NtukscS8RUIbxXQSWkQt4xU8Asb+ClGbvdUYCCs6D6gOFOKOvkktYuj5PB8VMxaqPh40aMo17X8k9wt1uaKDflb/PylKHR6v0XFT3lmNHlqvBIlM0+DisYE58i1ytoHVirf/+7MMkUMgzZ+MbgWFjBcBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBD8a/hBGCdvpHvKvxjLaWjUgDBOS7iwzct8tnmI2HSNXxgrcY+9HpzddXeJBqTAQ3WUOjx6UQX4DZqS1HW9VgJp88c=]
+#rhn_register::sslca: /usr/share/rhn/RHN-ORG-TRUSTED-SSL-CERT

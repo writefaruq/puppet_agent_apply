@@ -1,0 +1,15 @@
+The scripts in this folder are provided for convenience and speed-up actions.
+- install_puppet_agent.sh <your_USER_ID>
+- prepare_code.sh 
+- dry_run_a_puppet_module.sh <module_name>
+- install_a_puppet_module.sh.sh  <module_name>
+- install_multiple_modules.sh (adjust the MODULES variable, if necessary)
+- run_addjoin_cmd.sh <short-host-name> <your_AD_elevated_account>
+- enable_tsm_client.sh
+
+
+If you want to run all in one go:
+- Run after downloading the code: run_all_in_prod_vl478_part1.sh <your_USER_ID>
+- Run after creating a correct Puppet node definition file (/etc/puppet/hieradata/node/NODE_FQDN.yaml): 
+  run_all_in_prod_vl478_part2.sh <short-host-name> <your_elevated_AD_account>
+

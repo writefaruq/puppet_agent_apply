@@ -1,0 +1,108 @@
+###
+### File managed by Puppet
+###
+
+################################################################################
+# AGENT BEHAVIOUR
+
+<% if (@agentaddress.is_a?(Array)) and (@agentaddress.count > 0) -%>
+agentaddress <%= @agentaddress.join(',') %>
+<% else %>
+agentaddress udp:161
+<% end -%>
+
+################################################################################
+# ACCESS CONTROL
+
+# ------------------------------------------------------------------------------
+# Traditional Access Control
+rocommunity <%= @ro_community %> <%= @ro_network %>
+<% if @rw_community -%>
+#rwcommunity <%= @rw_community %> <%= @rw_network %>
+<% end -%>
+
+############ Some site-wide defaults ####################################################
+# For convenience these are given. But can be overriden by specific setiings 
+view systemview included .1
+dontLogTCPWrappersConnects 1
+proc sshd
+# ------------------------------------------------------------------------------
+# VACM Configuration
+#       sec.name       source        community
+<% if @com2sec.any? -%>
+<% @com2sec.each do |com2sec| -%>
+com2sec <%= com2sec %>
+<% end -%>
+<% end -%>
+
+#       groupName      securityModel securityName
+<% if @groups.any? -%>
+<% @groups.each do |group| -%>
+group   <%= group %>
+<% end -%>
+<% end -%>
+
+#       name          incl/excl  subtree             mask(optional)
+<% @views.each do |view| -%>
+view    <%= view %>
+<% end -%>
+
+#       group          context sec.model sec.level prefix read       write notif
+<% @accesses.each do |access| -%>
+access  <%= access %>
+<% end -%>
+
+# ------------------------------------------------------------------------------
+# Typed-View Configuration
+
+################################################################################
+# SYSTEM INFORMATION
+
+# ------------------------------------------------------------------------------
+# System Group
+sysLocation <%= @location %>
+sysContact <%= @contact %>
+sysServices <%= @services %>
+sysName <%= @sysname %>
+
+################################################################################
+# EXTENDING AGENT FUNCTIONALITY
+
+<% if @dlmod.any? -%>
+# ------------------------------------------------------------------------------
+# Dynamically Loadable Modules
+<% @dlmod.each do |mod| -%>
+dlmod <%= mod %>
+<% end -%>
+<% end -%>
+
+# load average checks
+
+# load [1MAX=12.0] [5MAX=12.0] [15MAX=12.0]
+# 1MAX:   If the 1 minute load average is above this limit at query
+#         time, the errorFlag will be set.
+# 5MAX:   Similar, but for 5 min average.
+# 15MAX:  Similar, but for 15 min average.
+# Check for loads:
+<% if @load -%>
+load <%= @load_averages %>
+<% end -%>
+
+# disk checks
+#
+# Check the / partition and make sure it contains at least 10 megs.
+#includeAllDisks 10%
+<% if @disk -%>
+disk <%= @disk_part_pct%>
+<% else %>
+disk 35 20 15
+<% end -%>
+
+################################################################################
+# OTHER CONFIGURATION
+
+<% @snmpd_config.each do |line| -%>
+<%= line %>
+<% end -%>
+
+

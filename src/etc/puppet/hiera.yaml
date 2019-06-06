@@ -1,0 +1,22 @@
+---
+:backends:
+  #- eyaml
+  - yaml
+:hierarchy:
+ - "node/%{::fqdn}"
+ #- common
+:logger: 
+  - console
+
+:yaml:
+# If datadir is empty here, so hiera uses its defaults:
+# - /var/lib/hiera on *nix
+# When specifying a datadir, make sure the directory exists.
+  :datadir: /etc/puppet/hieradata
+
+:eyaml:
+  :datadir: /etc/puppet/hieradata
+
+ # with default security settings
+  :pkcs7_public_key:  /etc/keys/public_key.pkcs7.pem
+  
